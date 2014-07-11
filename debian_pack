@@ -1,0 +1,13 @@
+#!/bin/sh
+
+mkdir debianpack
+git archive HEAD --format tar.gz -o debianpack/socketcand-0.3.1.tar.gz --prefix socketcand-0.3.1/
+cd debianpack
+tar xfz socketcand-0.3.1.tar.gz
+cd socketcand-0.3.1
+dh_make -f ../socketcand-0.3.1.tar.gz -s
+dpkg-buildpackage
+cd ../..
+cp debianpack/*.deb .
+rm -rf debianpack
+
